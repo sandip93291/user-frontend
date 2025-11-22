@@ -11,33 +11,7 @@ export class Service {
   private currentUserId = ''
   private currentName = ''
 
-  // ---------- ROLE ----------
-  setUserRole(role: string) {
-    this.currentUserRole = role;
-  }
 
-  getUserRole(): string {
-    return this.currentUserRole;
-  }
-
-  // ---------- ID ----------
-  setUserId(id: string) {
-    this.currentUserId = id;
-  }
-
-  getUserId(): string {
-    return this.currentUserId;
-  }
-
-  // ---------- NAME ----------
-  setName(name: string) {
-    this.currentName = name;
-  }
-
-  getName(): string {
-    return this.currentName;
-  }
-  
   constructor(private http: HttpClient) { }
 
   // Call API to get user by ID
