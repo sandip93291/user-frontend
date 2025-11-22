@@ -1,0 +1,51 @@
+<div class="user-form-container">
+  <h2>{{ userData ? 'Update User' : 'Create User' }}</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <div class="input-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" placeholder="Enter name">
+      <small *ngIf="submitted && userForm.controls['name'].errors" class="error">Name is required</small>
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter email">
+      <small *ngIf="submitted && userForm.controls['email'].errors" class="error">Valid email required</small>
+    </div>
+
+    <div class="input-group">
+      <label>Mobile</label>
+      <input type="number" formControlName="mobile" placeholder="Enter Mobile No.">
+      <small *ngIf="submitted && userForm.controls['mobile'].errors" class="error">Valid mobile required</small>
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="Enter password">
+      <small *ngIf="submitted && userForm.controls['password'].errors" class="error">
+        Minimum 6 characters
+      </small>
+    </div>
+
+    <div class="input-group">
+      <label>Status</label>
+      <select formControlName="isEnable">
+        <option [value]="true">Enabled</option>
+        <option [value]="false">Disabled</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Role</label>
+      <select formControlName="role">
+        <option value="admin">Admin</option>
+        <option value="faculty">Faculty</option>
+        <option value="student">Student</option>
+      </select>
+    </div>
+
+    <button type="submit">{{ userData ? 'Update' : 'Create' }}</button>
+  </form>
+</div>

@@ -1,0 +1,10 @@
+<div class="moving-text-component">
+    <div class="scrolling-text" [@scroll]="state" (@scroll.done)="scrollDone()">
+        <div class="marquee-items">
+            <div *ngFor="let item of data" class="marquee-item">
+                <span>{{item}}</span>
+            </div>
+        </div>
+
+    </div>
+</div>

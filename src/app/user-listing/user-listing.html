@@ -1,0 +1,49 @@
+<div class="user-listing">
+    <h2>Users</h2>
+
+    <div *ngIf="loading">Loading users...</div>
+
+    <div class="header-actions">
+        <button class="edit-btn" (click)="createUser()">Create User</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="users.length > 0" class="user-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Role</th>
+                <th>Approved</th>
+                <th class="actions">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>{{ u.id }}</td>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.mobile }}</td>
+                <td>{{ u.role }}</td>
+                <td>{{ u.approved ? 'Yes' : 'No' }}</td>
+
+                <td class="actions">
+                    <button class="edit-btn" (click)="editUser(u.id)">Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="page === 1">Previous</button>
+        <span>Page {{ page }}</span>
+        <button (click)="nextPage()">Next</button>
+    </div>
+</div>

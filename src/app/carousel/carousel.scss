@@ -1,0 +1,100 @@
+.carousel-component {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+}
+
+.slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;      /* FIX #1: center slide horizontally */
+  align-items: center;
+}
+
+.inner-slide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;            /* FIX #2: content stays centered */
+  width: 100%;
+  gap: 40px;
+}
+
+.left img {
+  width: 100%;
+}
+
+.right {
+  width: 50%;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.subtitle {
+    font-size: 19px;
+    color: #555;
+    margin-top: 12px;
+    font-weight: 400;
+}
+.btn-grp {
+  margin-top: 25px;
+  display: flex;
+  gap: 14px;
+}
+
+.btn1, .btn2 {
+  padding: 12px 33px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  outline: none;
+  border: none;
+}
+
+.btn1 {
+  background: #ff3b3b;
+  color: white;
+}
+
+.btn2 {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.indicators {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.indicators span {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indicators .active {
+  background: #f44336;
+  width: 12px;
+}

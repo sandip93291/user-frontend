@@ -1,0 +1,48 @@
+<div class="carousel-component">
+  <div class="container">
+
+    <div class="slides-wrapper"
+         [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+
+      <div class="slide" *ngFor="let item of data">
+
+        <div class="inner-slide">
+          <div class="left">
+            <img [src]="item.img" alt="">
+          </div>
+
+          <div class="right">
+            <div class="title" [innerHTML]="item.title">
+
+            </div>
+            <div class="subtitle" [innerHTML]="item.subTitle">
+    
+            </div>
+
+            <div class="btn-grp">
+              <button class="btn1">
+                {{ item.btn1 }}
+                <img src="https://qfinance.in/assets/images/form/black-up-arrow.svg">
+              </button>
+
+              <button class="btn2">
+                {{ item.btn2 }}
+                <img src="https://qfinance.in/assets/images/form/black-up-arrow.svg">
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="indicators">
+    <span 
+      *ngFor="let d of data; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="currentIndex = i">
+    </span>
+  </div>
+</div>

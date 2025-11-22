@@ -1,0 +1,74 @@
+
+.user-listing{
+  padding: 20px 20px 0px 20px;
+}
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+
+  th {
+    background: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+  }
+
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:hover {
+    background: #fafafa;
+  }
+
+  .actions {
+    text-align: center;
+  }
+ .edit-btn {
+    padding: 6px 12px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #0d47a1;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  button {
+    padding: 6px 12px;
+    border: none;
+    background: #1976d2;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}
+
+
+  

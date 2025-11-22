@@ -1,0 +1,32 @@
+    .moving-text-component {
+        height: 30px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        background-color: blue;
+        margin-bottom: auto 0px;
+        display: flex;
+        align-items: center;
+    }
+
+    .scrolling-text {
+        position: absolute;
+        white-space: nowrap;
+    }
+
+
+ 
+
+    .marquee-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        
+
+        .marquee-item {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+    }
