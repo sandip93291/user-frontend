@@ -1,5 +1,5 @@
 <div class="user-form-container">
-  <h2>{{ userData ? 'Update User' : 'Create User' }}</h2>
+  <h2>{{ userData.id != '0' ? 'Update User' : 'Create User' }}</h2>
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
@@ -46,6 +46,6 @@
       </select>
     </div>
 
-    <button type="submit">{{ userData ? 'Update' : 'Create' }}</button>
+    <button *ngIf="role!='student'" type="submit">{{  userData.id != '0' ? 'Update' : 'Create' }}</button>
   </form>
 </div>

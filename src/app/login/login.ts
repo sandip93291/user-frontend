@@ -35,7 +35,11 @@ export class Login {
         this.authService.setUserSessionCookie('Role', response.user.role);
         this.authService.setUserSessionCookie('UserId', response.user.id);
 
-        this.router.navigate(['/user-listing']);
+        if (response.user.role === 'student') {
+          this.router.navigate(['/create-update-user', response.user.id]);
+        } else {
+          this.router.navigate(['/user-listing']);
+        }
       },
       error: (error) => {
         console.error('Login failed:', error);

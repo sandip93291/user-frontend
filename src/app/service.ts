@@ -37,6 +37,7 @@ export class Service {
   getName(): string {
     return this.currentName;
   }
+  
   constructor(private http: HttpClient) { }
 
   // Call API to get user by ID
@@ -66,10 +67,10 @@ export class Service {
 
     if (user.id && user.id !== '0') {
       // Update user
-      return this.http.put<any>(`${environment.serviceHot}/${role}/user/${user.id}`, user, { headers });
+      return this.http.put<any>(`${environment.serviceHot}/${role}/users/${user.id}`, user, { headers });
     } else {
       // Create user
-      return this.http.post<any>(`${environment.serviceHot}/${role}/user`, user, { headers });
+      return this.http.post<any>(`${environment.serviceHot}/${role}/users`, user, { headers });
     }
   }
 

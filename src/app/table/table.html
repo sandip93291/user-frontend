@@ -1,0 +1,28 @@
+<div class="generic-component">
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let header of headers">
+                    {{ header.header }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: 10px;"></tr> <!-- Spacer row -->
+            <tr *ngFor="let content of tableContent">
+                <td *ngFor="let header of headers">
+                    <!-- Render the provided template or fallback to default -->
+                    <ng-container *ngIf="cellTemplates[header.field]; else defaultCell">
+                      <ng-container
+                        *ngTemplateOutlet="cellTemplates[header.field]; context: { row: content }"
+                      ></ng-container>
+                    </ng-container>
+                    <!-- Default cell rendering -->
+                    <ng-template #defaultCell>
+                        {{ getValue(content, header.field) }}
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
