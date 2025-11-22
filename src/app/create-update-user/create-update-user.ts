@@ -15,10 +15,16 @@ export class CreateUpdateUser implements OnInit {
   userId!: string;
   role = '';
   submitted = false;
+  filteredRoles: string[] = [];
+  roles = ['admin', 'faculty', 'student'];  // all roles
+  faculties: any[] = [];
+
   constructor(private service: Service, private route: ActivatedRoute, private router: Router
   ) { }
 
   ngOnInit() {
+
+
     this.role = this.service.getCookie('Role');
     this.userData = {
       id: 0,
@@ -27,7 +33,8 @@ export class CreateUpdateUser implements OnInit {
       password: '',
       mobile: '',
       isEnable: false,
-      role: 'user'
+      role: 'user',
+      facultyId: '0'
     }
 
     this.userId = this.route.snapshot.paramMap.get('id')!;
@@ -38,10 +45,28 @@ export class CreateUpdateUser implements OnInit {
       mobile: new FormControl(this.userData?.mobile || '', [Validators.required]),
       password: new FormControl(this.userData?.password || '', Validators.minLength(6)),
       isEnable: new FormControl(this.userData?.isEnable ?? true, Validators.required),
-      role: new FormControl(this.userData?.role || 'user', Validators.required)
+      role: new FormControl(this.userData?.role || 'student', Validators.required),
+      facultyId: new FormControl(this.userData?.role === 'student' ? this.userData?.facultyId || '' : ''),
     });
     if (this.userId !== '0') {
       this.loadUser(this.userId);
+    }
+    this.filterRoles();
+
+
+    // Subscribe to role changes
+    this.userForm.get('role')?.valueChanges.subscribe(role => {
+      if (role === 'student') {
+        this.loadFaculties(); // fetch faculty list
+      } else {
+        this.faculties = []; // hide faculty dropdown
+        this.userForm.get('facultyId')?.setValue('');
+      }
+    });
+
+    // If default role is student, load faculties immediately
+    if (this.userForm.get('role')?.value === 'student') {
+      this.loadFaculties();
     }
   }
 
@@ -56,13 +81,25 @@ export class CreateUpdateUser implements OnInit {
           password: '',
           isEnable: user.approved,
           role: user.role,
-          mobile: user.mobile
+          mobile: user.mobile,
+          facultyId: user.facultyid
         });
       },
       err => console.error('Error fetching user', err)
     );
   }
 
+  loadFaculties() {
+    this.service.getFaculties(this.role).subscribe({
+      next: (res: any) => {
+        this.faculties = res; // res should be array of {id, name}
+        this.userForm.patchValue({
+          facultyId: this.userForm.value.facultyId
+        });
+      },
+      error: (err: any) => console.error(err)
+    });
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -73,9 +110,10 @@ export class CreateUpdateUser implements OnInit {
       name: formValue.name,
       email: formValue.email,
       mobile: formValue.mobile,
-      password: formValue.password || '', 
-      approved: formValue.isEnable,           
-      role: formValue.role                     
+      password: formValue.password || '',
+      approved: formValue.isEnable,
+      role: formValue.role,
+      facultyId: formValue.role === 'student' ? formValue.facultyId : null
     };
 
     if (this.userId !== '0') user.id = this.userId;
@@ -93,5 +131,15 @@ export class CreateUpdateUser implements OnInit {
       },
       (err) => console.error('Error saving user', err)
     );
+  }
+
+  filterRoles() {
+    if (this.role === 'admin') {
+      this.filteredRoles = [...this.roles]; // admin sees all
+    } else if (this.role === 'faculty') {
+      this.filteredRoles = ['student']; // hide admin
+    } else {
+      this.filteredRoles = ['student']; // only student
+    }
   }
 }

@@ -40,12 +40,18 @@
     <div class="input-group">
       <label>Role</label>
       <select formControlName="role">
-        <option value="admin">Admin</option>
-        <option value="faculty">Faculty</option>
-        <option value="student">Student</option>
+        <option *ngFor="let role of filteredRoles" [value]="role">{{ role | titlecase }}</option>
       </select>
     </div>
 
-    <button *ngIf="role!='student'" type="submit">{{  userData.id != '0' ? 'Update' : 'Create' }}</button>
+    <!-- Only show faculty select if role is student -->
+    <div class="input-group" *ngIf="userForm.get('role')?.value === 'student' && role === 'admin'">
+      <label>Select Faculty</label>
+      <select formControlName="facultyId">
+        <option *ngFor="let faculty of faculties" [value]="faculty.id">{{ faculty.name }}</option>
+      </select>
+    </div>
+
+    <button *ngIf="role!='student'" type="submit">{{ userData.id != '0' ? 'Update' : 'Create' }}</button>
   </form>
 </div>

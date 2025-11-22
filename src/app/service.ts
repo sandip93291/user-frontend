@@ -88,6 +88,24 @@ export class Service {
     });
   }
 
+    getFaculties(role: string): Observable<any> {
+
+    // Get token using document.cookie
+    const token = this.getCookie('UserSession');
+
+    // URL
+    const url = `${environment.serviceHot}/${role}/faculties`;
+
+    // Add token in header
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(url, {
+      headers
+    });
+  }
+
   public getCookie(name: string): string {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
